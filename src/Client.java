@@ -13,36 +13,32 @@ import java.util.Scanner;
  */
 public class Client {
 	public static void main(String[] args) {
-		// if (args.length < 1){
-		// return;
-		// }
-		//
-		// int portNumber = Integer.parseInt(args[0]);
 
+		ClientThread t = new ClientThread();
 		try {
 			Socket socket = new Socket("localhost", 4999);
-			int waitCount = 0;
-			int delay = 1000;
-			// send message to Server
+
 			DataOutputStream dout = new DataOutputStream(socket.getOutputStream());
 			dout.writeUTF("Are you ALIVE?");
-			do {
-				Thread.sleep(1000);
-				waitCount++;
-				System.out.println("Client : Waiting for response from Server " + waitCount + " seconds");
 
-				delay += 1000;
-			} while (delay <= 5000);
+			int waitCount = 0;
+			// send message to Server
+			int delay = 1000;
 
-			// receive message from Server
-			DataInputStream data = new DataInputStream(socket.getInputStream());
-			String message = data.readUTF();
-			System.out.println("Server: " + message);
-			System.out.println("Client: Response Received\nWait Count Seconds " + waitCount);
+			t.start();
+			waitCount++;
 
 			// end client
 			Scanner scan = new Scanner(System.in);
 			String endMsg;
+
+			// receive message from Server
+			DataInputStream data = new DataInputStream(socket.getInputStream());
+			String message = data.readUTF();
+			t.flag = false;
+			System.out.println("Server: " + message);
+			System.out.println("Client: Response Received\nWait Count Seconds " + waitCount);
+
 			do {
 				System.out.println("To terminate Client , Enter 'End'");
 				endMsg = scan.nextLine();

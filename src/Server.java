@@ -13,13 +13,7 @@ import java.util.concurrent.CountDownLatch;
  */
 public class Server {
 	public static void main(String[] args) {
-		// if (args.length < 1){
-		// return;
-		// }
-		//
-		// String conn = args[0];
-		// String host = args[1];
-		// int portNumber = Integer.parseInt(args[2]);
+
 		CountDownLatch latch = new CountDownLatch(10);
 		int portNumber = 4999;
 

@@ -17,7 +17,7 @@ public class ServerThread extends Thread {
 			DataInputStream dis = new DataInputStream(socket.getInputStream());
 			String str = (String) dis.readUTF();
 			System.out.println("Client: " + str);
-			int delay = 5000;
+			int delay = 1000;
 			Thread.sleep(delay);
 			DataOutputStream data = new DataOutputStream(socket.getOutputStream());
 			data.writeUTF("I AM ALIVE");

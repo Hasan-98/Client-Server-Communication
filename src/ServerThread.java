@@ -1,6 +1,7 @@
 import java.io.*;
 import java.net.*;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 public class ServerThread extends Thread {
 	private Socket socket;
@@ -17,8 +18,10 @@ public class ServerThread extends Thread {
 			DataInputStream dis = new DataInputStream(socket.getInputStream());
 			String str = (String) dis.readUTF();
 			System.out.println("Client: " + str);
-			int delay = 1000;
-			Thread.sleep(delay);
+			int delay = 7000;
+			latch.await(delay, TimeUnit.MILLISECONDS);
+
+			// Thread.sleep(delay);
 			DataOutputStream data = new DataOutputStream(socket.getOutputStream());
 			data.writeUTF("I AM ALIVE");
 

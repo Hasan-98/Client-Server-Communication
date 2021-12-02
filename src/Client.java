@@ -6,6 +6,7 @@
 import java.io.*;
 import java.net.*;
 import java.util.Scanner;
+import java.util.concurrent.CountDownLatch;
 
 /**
  *
@@ -14,7 +15,10 @@ import java.util.Scanner;
 public class Client {
 	public static void main(String[] args) {
 
+
+
 		ClientThread t = new ClientThread();
+
 		try {
 			Socket socket = new Socket("localhost", 4999);
 
@@ -23,7 +27,6 @@ public class Client {
 
 			int waitCount = 0;
 			// send message to Server
-			int delay = 1000;
 
 			t.start();
 			waitCount++;

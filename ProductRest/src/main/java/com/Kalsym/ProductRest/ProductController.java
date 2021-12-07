@@ -51,11 +51,8 @@ public class ProductController {
     }
 
     @PutMapping("/products/{id}")
-    public void update(@RequestBody Product product, @PathVariable int id) {
-
-        //  Product existProduct = service.Update(id);
-        service.UpdateProduct(id, product);
-
+    public ResponseEntity<Product> update(@RequestBody Product product, @PathVariable int id) {
+        return new ResponseEntity<Product>(service.UpdateProduct(id, product), HttpStatus.OK);
     }
 
     @DeleteMapping("/products/{id}")

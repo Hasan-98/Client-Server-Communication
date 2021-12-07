@@ -6,6 +6,7 @@ package com.Kalsym.ProductRest;
 
 import java.io.Serial;
 import java.util.List;
+import org.apache.velocity.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,9 +32,17 @@ public class ProductService {
         repo.save(product);
 
     }
-    public void UpdateProduct(int id , Product p){
-        repo.save(p);
+
+    public Product UpdateProduct(int id, Product p) {
+
+        Product existProduct = repo.findById(id).orElseThrow();
+
+        existProduct.setName(p.getName());
+        existProduct.setPrice(p.getPrice());
+        repo.save(existProduct);
+        return existProduct;
     }
+
     public Product Update(int id) {
         return repo.findById(id).get();
     }

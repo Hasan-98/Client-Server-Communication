@@ -4,7 +4,9 @@
  */
 package com.Kalsym.ProductRest;
 
+import java.nio.file.Files;
 import java.util.List;
+import java.util.NoSuchElementException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +36,7 @@ public class ProductController {
     @GetMapping("/products/{id}")
     public ResponseEntity<Product> get(@PathVariable int id) {
         try {
-            Product product = service.get(id);
+            Product product = service.Update(id);
             return new ResponseEntity<Product>(product, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<Product>(HttpStatus.NOT_FOUND);
@@ -42,24 +44,22 @@ public class ProductController {
     }
 
     @PostMapping("/products")
-    public void add(@RequestBody Product product) {
+    public Product add(@RequestBody Product product) {
         service.save(product);
+        return product;
+
     }
 
     @PutMapping("/products/{id}")
-    public  ResponseEntity<?> update(@RequestBody Product product, @PathVariable int id) {
-        try {
-            Product existProduct = service.get(id);
-            service.save(product);
-            return new ResponseEntity<>(HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    public void update(@RequestBody Product product, @PathVariable int id) {
+
+        //  Product existProduct = service.Update(id);
+        service.UpdateProduct(id, product);
 
     }
-    
+
     @DeleteMapping("/products/{id}")
-    public void delete(@PathVariable int id){
+    public void delete(@PathVariable int id) {
         service.delete(id);
     }
 }

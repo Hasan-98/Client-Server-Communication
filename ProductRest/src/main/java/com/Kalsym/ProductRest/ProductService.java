@@ -15,19 +15,26 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ProductService {
-    
+
     @Autowired
     private ProductRepository repo;
-    
+
     public List<Product> listAll() {
         return repo.findAll();
     }
-    
+
+    public void UpdateProduct(Product p) {
+        repo.save(p);
+    }
+
     public void save(Product product) {
         repo.save(product);
+
     }
-    
-    public Product get(int id) {
+    public void UpdateProduct(int id , Product p){
+        repo.save(p);
+    }
+    public Product Update(int id) {
         return repo.findById(id).get();
     }
 

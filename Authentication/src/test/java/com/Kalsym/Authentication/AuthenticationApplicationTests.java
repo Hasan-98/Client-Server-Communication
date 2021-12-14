@@ -1,10 +1,10 @@
-package com.Kalsym.ProductRest;
+package com.Kalsym.Authentication;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ProductRestApplicationTests {
+class AuthenticationApplicationTests {
 
 	@Test
 	void contextLoads() {

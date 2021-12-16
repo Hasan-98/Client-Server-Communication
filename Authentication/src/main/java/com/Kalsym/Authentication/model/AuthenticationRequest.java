@@ -1,6 +1,16 @@
 package com.Kalsym.Authentication.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+@Entity
 public class AuthenticationRequest {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Integer id;
     String username;
     String password;
 
@@ -10,6 +20,14 @@ public class AuthenticationRequest {
     public AuthenticationRequest(String username, String password) {
         this.username = username;
         this.password = password;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getUsername() {
